@@ -1,0 +1,9 @@
+{
+  "name": "CoodeshBackend",
+  "version": "1.0.0",
+  "description": "Backend of coodesh challange",
+  "main": "server.js",
+  "author": "Victor Biasibetti",
+  "license": "MIT",
+  "private": false
+}
