@@ -1,8 +1,9 @@
 const express = require('express');
+const routes = require('./routes');
 
 const server = express();
 
+server.use(routes);
 
-server.get('/', (request, response) => response.json({ ok: true }));
 
 server.listen(3000, () => console.log('server on'));
