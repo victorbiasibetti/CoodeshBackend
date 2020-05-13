@@ -6,6 +6,9 @@
   "author": "Victor Biasibetti",
   "license": "MIT",
   "private": false,
+  "scripts": {
+    "dev": "node server.js"
+  },
   "dependencies": {
     "express": "^4.17.1"
   }
