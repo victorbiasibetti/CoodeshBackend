@@ -5,5 +5,8 @@
   "main": "server.js",
   "author": "Victor Biasibetti",
   "license": "MIT",
-  "private": false
+  "private": false,
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
