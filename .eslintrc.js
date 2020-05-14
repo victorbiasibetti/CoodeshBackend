@@ -13,5 +13,7 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 11,
   },
-  rules: {},
+  rules: {
+    "class-methods-use-this": "off"
+  },
 };
