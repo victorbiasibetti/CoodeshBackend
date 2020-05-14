@@ -1,9 +1,3 @@
-const express = require('express');
-const routes = require('./routes');
-
-const server = express();
-
-server.use(routes);
-
+const server = require('./app');
 
 server.listen(3000, () => console.log('server on'));
