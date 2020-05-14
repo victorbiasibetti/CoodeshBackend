@@ -1,9 +1,8 @@
 const { Router } = require('express');
+const productRoutes = require('./products.routes');
 
 const routes = Router();
 
-routes.get('/', (request, response) => response.json({ ok: true }));
-
-routes.post('/products', (request, response) => response.json({ ok: true }));
+routes.use(productRoutes);
 
 module.exports = routes;
