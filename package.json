@@ -8,7 +8,8 @@
   "private": false,
   "scripts": {
     "dev": "node --inspect src/server.js",
-    "test": "jest --detectOpenHandles"
+    "test": "jest --detectOpenHandles",
+    "start": "node src/server.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
