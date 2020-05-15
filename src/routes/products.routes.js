@@ -65,4 +65,38 @@ productRoutes.post('/products/add', async (request, response) => {
   }
 });
 
+productRoutes.get('/', (request, response) => response.json({
+  routes: [
+    {
+      route: '/product',
+      type: 'POST',
+      details: 'This route use to import products file with JSON format.'
+      + ' The file expect this format on all fields are required.'
+      + '\nExample: [ { "title": "Brown eggs", "type": "dairy", "description":'
+      + ' "Raw organic brown eggs in a basket", "filename": "0.jpg", '
+      + '"height": 600, "width": 400, "price": 28.1, "rating": 4 }, ]',
+    },
+    {
+      route: '/products',
+      type: 'GET',
+      details: 'Get list of all products in database.',
+    },
+    {
+      route: '/products/:id',
+      type: 'GET',
+      details: 'Get a specific product in database.',
+    },
+    {
+      route: '/products/:id',
+      type: 'PUT',
+      details: 'Update a specific product in database. Fields to be updated: title, type, rating.',
+    },
+    {
+      route: '/products/:id',
+      type: 'DELTE',
+      details: 'Delete a specific product in database. Yes, is a hard delete.',
+    },
+  ],
+}));
+
 module.exports = productRoutes;
