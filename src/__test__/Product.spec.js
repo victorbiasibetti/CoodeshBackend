@@ -3,12 +3,23 @@
 
 const request = require('supertest');
 const path = require('path');
-
+const fs = require('fs');
+const mongo = require('../database');
 const app = require('../app');
 
 
 // eslint-disable-next-line no-undef
 describe('Product', () => {
+  beforeAll(async () => {
+    await mongo.models.Product.remove({});
+  });
+
+  afterAll(async () => {
+    await mongo.models.Product.remove({});
+    done();
+  });
+
+
   it('should be able to delete a Product', async () => {
     const product = {
       title: 'Brown eggs',
@@ -39,9 +50,18 @@ describe('Product', () => {
 
     const response = await request(app).post('/products').attach('file', importJSON);
 
-    expect(response.body).toMatchObject({
-      ok: true,
+    const productsImport = JSON.parse(fs.readFileSync(importJSON, 'utf8'));
+
+    const productsReceived = response.body.map((product) => {
+      delete product._id;
+      delete product.__v;
+      delete product.createdAt;
+      return product;
     });
+
+    expect(productsReceived).toEqual(
+      productsImport,
+    );
   });
 
   it('should be able to update Product title, price and type', async () => {

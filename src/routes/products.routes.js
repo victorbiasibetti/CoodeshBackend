@@ -15,7 +15,7 @@ const productRoutes = Router();
 
 productRoutes.get('/products', async (request, response) => {
   try {
-    const products = await Product.find();
+    const products = await Product.find().select('-__v');
     return response.json(products);
   } catch (err) {
     return response.status(400).send(err.message);

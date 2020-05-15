@@ -14,6 +14,7 @@ module.exports = {
     ecmaVersion: 11,
   },
   rules: {
-    "class-methods-use-this": "off"
+    "class-methods-use-this": "off",
+    "no-param-reassign": "off"
   },
 };
