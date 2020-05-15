@@ -1,13 +1,36 @@
 const { Router } = require('express');
 
+const Product = require('../models/Product');
+
 const CreateProductService = require('../services/CreateProductService');
 const UpdateProductService = require('../services/UpdateProductService');
+const DeleteProductService = require('../services/DeleteProductService');
 
 const productRoutes = Router();
 
-productRoutes.get('/', (request, response) => response.json({ ok: true }));
+productRoutes.get('/products', async (request, response) => {
+  try {
+    const products = await Product.find();
+    return response.json(products);
+  } catch (err) {
+    return response.status(400).send(err.message);
+  }
+});
 
 productRoutes.post('/products', (request, response) => response.json({ ok: true }));
+
+productRoutes.delete('/products/:id', async (request, response) => {
+  try {
+    const { id } = request.params;
+    const deleteProduct = new DeleteProductService();
+    await deleteProduct.execute({
+      id,
+    });
+    return response.status(200).send();
+  } catch (err) {
+    return response.status(400).send({ error: err.message });
+  }
+});
 
 productRoutes.put('/products/:id', async (request, response) => {
   try {

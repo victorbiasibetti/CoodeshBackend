@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-undef */
 
 const request = require('supertest');
@@ -5,10 +6,32 @@ const path = require('path');
 
 const app = require('../app');
 
+
 // eslint-disable-next-line no-undef
 describe('Product', () => {
-  afterAll((done) => {
-    done();
+  it('should be able to delete a Product', async () => {
+    const product = {
+      title: 'Brown eggs',
+      type: 'dairy',
+      description: 'Raw organic brown eggs in a basket',
+      filename: '0.jpg',
+      height: 600,
+      width: 400,
+      price: 28.1,
+      rating: 4,
+    };
+
+    const response = await request(app).post('/products/add').send(product);
+
+    let products = await request(app).get('/products').send();
+
+    expect(products.body).toHaveLength(1);
+
+    await request(app).delete(`/products/${response.body._id}`).send();
+
+    products = await request(app).get('/products').send();
+
+    expect(products.body).toHaveLength(0);
   });
 
   it('should be able to create a new Products by Json file', async () => {
@@ -62,7 +85,6 @@ describe('Product', () => {
 
     product.price = 30.0;
 
-    // eslint-disable-next-line no-underscore-dangle
     response = await request(app).put(`/products/${response.body._id}`).send(product);
 
     expect(response.body.price).toBe(28.1);
