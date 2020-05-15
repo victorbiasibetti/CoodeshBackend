@@ -1,10 +1,15 @@
 const { Router } = require('express');
+const multer = require('multer');
 
 const Product = require('../models/Product');
+const uploadConfig = require('../config/upload');
+
+const upload = multer(uploadConfig);
 
 const CreateProductService = require('../services/CreateProductService');
 const UpdateProductService = require('../services/UpdateProductService');
 const DeleteProductService = require('../services/DeleteProductService');
+const ImportProducstService = require('../services/ImportProductsService');
 
 const productRoutes = Router();
 
@@ -17,7 +22,11 @@ productRoutes.get('/products', async (request, response) => {
   }
 });
 
-productRoutes.post('/products', (request, response) => response.json({ ok: true }));
+productRoutes.post('/products', upload.single('file'), async (request, response) => {
+  const importProducts = new ImportProducstService();
+  const products = await importProducts.execute(request.file.path);
+  return response.json(products);
+});
 
 productRoutes.delete('/products/:id', async (request, response) => {
   try {
