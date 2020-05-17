@@ -44,10 +44,10 @@ productRoutes.delete('/products/:id', async (request, response) => {
 productRoutes.put('/products/:id', async (request, response) => {
   try {
     const { id } = request.params;
-    const { title, type, rating } = request.body;
+    const { title, type, price } = request.body;
     const updateProduct = new UpdateProductService();
     const product = await updateProduct.execute({
-      id, title, type, rating,
+      id, title, type, price,
     });
     return response.json(product);
   } catch (err) {

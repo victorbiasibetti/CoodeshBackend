@@ -5,13 +5,13 @@ class UpdateProductService {
     id,
     title,
     type,
-    rating,
+    price,
   }) {
     try {
       await Product.updateOne({ _id: id }, {
         title,
         type,
-        rating,
+        price,
       });
 
       const product = await Product.findById(id);
