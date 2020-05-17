@@ -22,9 +22,9 @@ productRoutes.get('/products', async (request, response) => {
   }
 });
 
-productRoutes.post('/products', upload.single('file'), async (request, response) => {
+productRoutes.post('/products', upload.array('files'), async (request, response) => {
   const importProducts = new ImportProducstService();
-  const products = await importProducts.execute(request.file.path);
+  const products = await importProducts.execute(request.files);
   return response.json(products);
 });
 
