@@ -15,7 +15,11 @@ O projeto irá iniciar na porta 4000.
 
 ## Programação
 O backend segue os princípios de SOLID e a separação de pastas já contempla o princípio de `Separation of Concepts` onde cada service faz uma tarefa especifica e toda lógica foi removida das rotas e inseridas nestes arquivos.
+
 Os arquivos referentes a base de dados estão na models, referencias do modelo.
+
 A inicialização da comunicação com a database está na pasta database.
+
 Na pasta config está a configuração do multer, responsável pelo tratamento do upload de arquivos.
+
 Na parta __test__ os arquivos de testes unitários da aplicação
